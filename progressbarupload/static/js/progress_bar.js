@@ -18,10 +18,10 @@ $(document).ready(function(){
         else {
           $('#progressBar').attr('hidden', '');  // hide progress bar if no datas
         }
-        window.setTimeout(update_progress_info, 200);
+        window.setTimeout(update_progress_info, 1000*0.5);
       });
     }
-    window.setTimeout(update_progress_info, 200);
+    window.setTimeout(update_progress_info, 1000*0.5);
     $.data(this, 'submitted', true); // mark form as submitted.
     return true;
   });
