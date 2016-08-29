@@ -1,7 +1,7 @@
 $(document).ready(function(){
   var uuid = $('#progressBar').data('progress_bar_uuid');
   // form submission
-  $('form').submit(function(){
+  $('form.progressbar').submit(function(){
     // Prevent multiple submits
     if ($.data(this, 'submitted')) return false;
     // Append X-Progress-ID uuid form action
