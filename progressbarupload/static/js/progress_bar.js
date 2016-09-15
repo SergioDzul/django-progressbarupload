@@ -1,11 +1,13 @@
 $(document).ready(function(){
-    var uuid = $('#progressBar').data('progress_bar_uuid');
-    // form submission
+  var uuid = $('#progressBar').data('progress_bar_uuid');
+  // form submission
   $('form.progressbar').submit(function(){
     // Prevent multiple submits
     if ($.data(this, 'submitted')) return false;
     // Append X-Progress-ID uuid form action
-    var upload_progress_url = this.action + (this.action.indexOf('?') == -1 ? '?' : '&') + 'X-Progress-ID=' + uuid;
+    // POST DEFAULT
+    this.action = this.action.split('?')[0];
+    this.action += '?X-Progress-ID=' + uuid;
     // Update progress bar
     function update_progress_info() {
       $.getJSON(upload_progress_url, {'X-Progress-ID': uuid}, function(data, status){
@@ -17,7 +19,6 @@ $(document).ready(function(){
         }
         else {
           $('#progressBar').attr('hidden', '');  // hide progress bar if no datas
-
         }
         window.setTimeout(update_progress_info, 1000*0.5);
       });
@@ -26,5 +27,4 @@ $(document).ready(function(){
     $.data(this, 'submitted', true); // mark form as submitted.
     return true;
   });
-  
 });
