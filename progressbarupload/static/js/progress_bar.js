@@ -1,20 +1,11 @@
 $(document).ready(function(){
-
     var uuid = $('#progressBar').data('progress_bar_uuid');
-  if($('form.progressbar').length > 0){
-    if(document.location.search.length > 0){
-        document.location.search= '';
-    }
-  }
     // form submission
   $('form.progressbar').submit(function(){
     // Prevent multiple submits
     if ($.data(this, 'submitted')) return false;
     // Append X-Progress-ID uuid form action
-    if(this.action.indexOf('?') == -1){
-        this.action=this.action.split('?')[0];
-    }
-    this.action += (this.action.indexOf('?') == -1 ? '?' : '&') + 'X-Progress-ID=' + uuid;
+    var upload_progress_url = this.action + (this.action.indexOf('?') == -1 ? '?' : '&') + 'X-Progress-ID=' + uuid;
     // Update progress bar
     function update_progress_info() {
       $.getJSON(upload_progress_url, {'X-Progress-ID': uuid}, function(data, status){
